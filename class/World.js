@@ -2,14 +2,15 @@ class World {
   width = 0
   height = 0
 
-  player = null
-  frutis = null
+  player = []
+  frutis = []
   
   constructor(nome) {
     this.nome = nome
   }
-  show() {
-    console.log(this.nome)
+  
+  addFruits(fruit) {
+
   }
 } 
 

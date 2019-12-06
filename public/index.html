@@ -24,16 +24,40 @@
   </style>
 </head>
 <body>
-  <div class="context">
-    <div class="person"></div>
+  <div id="app">
+    <div class="context">
+      {{mm}}
+      <div class="person"></div>
+    </div>
   </div>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    var socket = io.connect('http://localhost:8000');
-    socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-    });
+    let msg
+
+    ;
+
+    const vm = new Vue({
+      el: "#app", 
+      data: {
+        socket = io.connect('http://localhost:8000'),
+        mm = ""
+      },
+      methods: {
+        async getPlayer() {
+          const get = await fetch("http://localhost:8000")
+          const result = await get.text()
+          console.log(result)
+        }
+      },
+      created() {
+        this.getPlayer()
+        this.socket.on('news', function (data) {
+          this.mm = data
+          console.log(data);
+          socket.emit('my other event', { my: 'data' });
+        })
+      }
+    })
   </script>
 </body>
 </html>
