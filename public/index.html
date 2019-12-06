@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js"></script>
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .context {
+      width: 100vw;
+      height: 100vh;
+      background: silver;
+    }
+    .person {
+      width: 20px;
+      height: 20px;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="context">
+    <div class="person"></div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8000');
+    socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+    });
+  </script>
+</body>
+</html>
